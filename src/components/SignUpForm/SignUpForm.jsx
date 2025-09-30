@@ -84,6 +84,5 @@ const SignUpForm = async () => {
   )
 }
 
-
-
+export default SignUpForm;
   
