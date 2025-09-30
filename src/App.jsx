@@ -14,7 +14,6 @@ const App = () => {
         <Route path="/" element={<Landing/>}/> {/* confirm if this needs to be conditional*/ }
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
-        
       </Routes>
     </>
   )
