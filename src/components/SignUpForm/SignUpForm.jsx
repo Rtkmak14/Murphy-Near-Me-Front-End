@@ -1,11 +1,11 @@
 import {useState,useContext} from "react"
 import {useNavigate} from "react-router"
 
-import {signUp} from  "../../contexts/UserContext"
+import {signUp} from  "../../services/authService"
 
 import {UserContext} from "../../contexts/UserContext"
 
-const SignUpForm = async () => {
+const SignUpForm = () => {
     const navigate = useNavigate()
     const {setUser} = useContext(UserContext)
     const [message, setMessage] = useState('')
@@ -84,6 +84,4 @@ const SignUpForm = async () => {
   )
 }
 
-
-
-  
+export default SignUpForm
