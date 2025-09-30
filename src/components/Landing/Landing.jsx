@@ -12,7 +12,16 @@ const Landing = ()=> {
 
     const [searchQuery, setSearchQuery] = useState('');
 
+    useEffect(() => {
+            const testFetch = async () => {
+        const data = await userService.index(user)
+        setAddress(data)
+    }
+    testFetch()
+    }, [user])
 
+    console.log('address list:', addresses)
+    
 const handleChange = (evt) => {
     setSearchQuery(evt.target.value);
     console.log(evt.target.value)

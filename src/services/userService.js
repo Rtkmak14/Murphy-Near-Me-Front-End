@@ -1,8 +1,8 @@
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/users`;
 
-const index = async () => {
+const index = async (user) => {
   try {
-    const res = await fetch(BASE_URL, {
+    const res = await fetch(`${BASE_URL}/${user._id}/saved-locations`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     });
 
