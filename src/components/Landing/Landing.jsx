@@ -24,6 +24,23 @@ const handleSubmit = (evt) => {
     console.log('This has been submitted');
 }
 
+useEffect(() => {
+  if (!user) return;
+
+  const fetchAddresses = async () => {
+    try {
+      const data = await userService.index(user);
+      setAddress(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  fetchAddresses();
+}, [user]);
+
+
+console.log(addresses)
 
     return (
         <>
