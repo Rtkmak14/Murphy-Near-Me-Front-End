@@ -4,6 +4,8 @@ import { UserContext } from "../../contexts/UserContext";
 
 import * as userService from "../../services/userService";
 
+
+
 const Landing = ()=> {
 
     const {user} = useContext(UserContext)
@@ -16,12 +18,11 @@ const Landing = ()=> {
 const handleChange = (evt) => {
     setSearchQuery(evt.target.value);
     console.log(evt.target.value)
-    // onSearch(evt.target.value);
 };
 
 const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log('This has been submitted');
+    // console.log('This has been submitted');
 }
 
 
