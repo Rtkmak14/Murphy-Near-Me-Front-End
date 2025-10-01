@@ -3,6 +3,7 @@ import { UserContext } from "../../contexts/UserContext";
 import { Link } from "react-router";
 import * as locationService from "../../services/locationService";
 import SavedLocationsList from "../SavedLocationsList/SavedLocationsList";
+import MapComponent from "../MapComponent/MapComponent";
 
 
 
@@ -14,17 +15,7 @@ const Landing = (props)=> {
     const [selectedSavedLocation, setSelectedSavedLocation] = useState(null)
     
 
-    const [searchQuery, setSearchQuery] = useState('');
 
-const handleChange = (evt) => {
-    setSearchQuery(evt.target.value);
-    console.log(evt.target.value);
-};
-
-const handleSubmit = (evt) => {
-    evt.preventDefault();
-    // console.log('This has been submitted');
-};
 
 useEffect(() => {
   const fetchSavedLocations = async () => {
@@ -45,14 +36,7 @@ console.log(savedLocations)
         <>
             {!user? (<aside>Please login to see your saved addresses!</aside>):
             (<aside>{<SavedLocationsList savedLocations={savedLocations}/>}</aside>)}
-        
-            <form onSubmit={handleSubmit}>
-                <input type="text"
-                placeholder="Search Addresses"
-                value={searchQuery}
-                onChange={handleChange}/>
-                <button>Submit</button>
-            </form>
+            <MapComponent/>
         </>
     )
 }

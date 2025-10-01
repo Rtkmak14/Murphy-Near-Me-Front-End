@@ -6,6 +6,7 @@ import SignUpForm from "./components/SignUpForm/SignUpForm";
 import SignInForm from './components/signInForm/signInForm'
 import Landing from './components/Landing/Landing'
 import LocationForm from "./components/SavedAddressessForm/SavedAddressessForm";
+import MapComponent from "./components/MapComponent/MapComponent";
 
 
 const App = () => {
