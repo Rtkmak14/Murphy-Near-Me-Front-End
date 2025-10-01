@@ -21,8 +21,7 @@ const getGeocode = async (address) => {
     address.split(' ').join('+')
     const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${apiKey}`)
     const data = await res.json()
-    const location = data[0].geometry.location
-    return location
+    return data.results[0].geometry.location
 }
 
 export {
