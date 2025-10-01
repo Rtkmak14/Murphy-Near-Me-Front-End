@@ -3,10 +3,10 @@ import { Link } from "react-router";
 
 import { UserContext } from "../../contexts/UserContext";
 
-import * as userService from "../../services/locationService";
-import * as googleMapsService from '../../services/googleMapsService'
+import * as locationService from "../../services/locationService";
 
-import MapComponent from "../MapComponent/MapComponent";
+import { Link } from "react-router";
+import SavedLocationsList from "../SavedLocationsList/SavedLocationsList";
 
 
 
@@ -16,46 +16,44 @@ const Landing = ()=> {
 
     const [savedLocations, setSavedLocations] = useState([]);
     const [selectedSavedLocation, setSelectedSavedLocation] = useState(null)
-    const [isFormOpen, setIsFormOpen] = useState(false)
-    const [editMode, setEditMode] = useState(false)
+    
 
     const [searchQuery, setSearchQuery] = useState('');
 
 const handleChange = (evt) => {
     setSearchQuery(evt.target.value);
-    console.log(evt.target.value)
+    console.log(evt.target.value);
 };
 
 const handleSubmit = (evt) => {
     evt.preventDefault();
     // console.log('This has been submitted');
-}
+};
 
-const handleEditSavedLocation = (savedLocation)=> {
-  setIsFormOpen(true)
-  setEditMode(true)
-  setSelectedSavedLocation(savedLocation)
-}
+const handleSelect = (savedLocation)=> {
+  setSelectedSavedLocation(savedLocation);
+};
 
 useEffect(() => {
   const fetchSavedLocations = async () => {
     try {
-      const data = await userService.index(user);
+      const data = await locationService.index(user);
       setSavedLocations(data);
     } catch (err) {
       console.log(err);
     }
   };
+  
+  fetchSavedLocations();
+},[user]);
 
-  if(user) fetchSavedLocations();
-}, [user]);
-    console.log(savedLocations.locations)
+console.log(savedLocations)
+
     return (
         <>
             {!user? (<aside>Please login to see your saved addresses!</aside>):
-            (<aside>Welcome {user.username}</aside>)}
-            <Link to="/locations/new">create address</Link>
-              
+            (<aside>{<SavedLocationsList savedLocations={savedLocations}/>}</aside>)}
+        
             <form onSubmit={handleSubmit}>
                 <input type="text"
                 placeholder="Search Addresses"
@@ -63,6 +61,8 @@ useEffect(() => {
                 onChange={handleChange}/>
                 <button>Submit</button>
             </form>
+
+            <Link to="/locations/new">Add New</Link>
         </>
     )
 }
