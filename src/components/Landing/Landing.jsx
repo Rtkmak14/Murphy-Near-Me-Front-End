@@ -19,7 +19,7 @@ const Landing = ()=> {
 
 const handleChange = (evt) => {
     setSearchQuery(evt.target.value);
-    console.log(evt.target.value)
+    console.log(evt.target.value);
 };
 
 const handleSubmit = (evt) => {

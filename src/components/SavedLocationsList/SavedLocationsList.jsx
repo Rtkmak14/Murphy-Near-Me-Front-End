@@ -3,7 +3,7 @@ function SavedLocationsList({ savedLocations, handleEditSavedLocations, handleDe
     <div className="saved-locations">
       <h2>Saved Addresses</h2>
       <ul>
-        {savedLocations.map((savedLocation) => (
+        {savedLocations.locations.map((savedLocation) => (
           <li key={savedLocation._id}>
             <p>
               {savedLocation.name}
