@@ -1,8 +1,12 @@
 import { useEffect, useState, useContext } from "react";
+import { Link } from "react-router";
 
 import { UserContext } from "../../contexts/UserContext";
 
 import * as userService from "../../services/locationService";
+import * as googleMapsService from '../../services/googleMapsService'
+
+import MapComponent from "../MapComponent/MapComponent";
 
 
 
@@ -33,26 +37,32 @@ const handleEditSavedLocation = (savedLocation)=> {
   setSelectedSavedLocation(savedLocation)
 }
 
-useEffect(() => {
-  if (!user) return;
+const fetchQuery = async () => {
+  const data = await googleMapsService.nearbySearch()
+  console.log(data)
+}
 
-  const fetchSavedLocations = async () => {
-    try {
-      const data = await userService.index(user);
-      setSavedLocations(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+// useEffect(() => {
+//   const fetchSavedLocations = async () => {
+//     try {
+//       const data = await userService.index(user);
+//       setSavedLocations(data);
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   };
 
-  fetchSavedLocations();
-}, [user]);
-
+//   if(user) fetchSavedLocations();
+// }, [user]);
+    console.log(savedLocations.locations)
     return (
         <>
             {!user? (<aside>Please login to see your saved addresses!</aside>):
             (<aside>Welcome {user.username}</aside>)}
-        
+            <MapComponent />
+            <Link to="/locations/new">create address</Link>
+            <button onClick={fetchQuery}>get data</button>>
+              
             <form onSubmit={handleSubmit}>
                 <input type="text"
                 placeholder="Search Addresses"
