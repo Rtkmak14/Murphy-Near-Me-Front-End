@@ -4,8 +4,6 @@ import { Link } from "react-router";
 import { UserContext } from "../../contexts/UserContext";
 
 import * as locationService from "../../services/locationService";
-
-import { Link } from "react-router";
 import SavedLocationsList from "../SavedLocationsList/SavedLocationsList";
 
 
