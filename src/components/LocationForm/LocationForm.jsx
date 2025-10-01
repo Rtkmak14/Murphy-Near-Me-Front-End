@@ -1,9 +1,13 @@
 import { useState, useContext } from "react";
-
+import { useNavigate } from "react-router";
 import * as locationService from "../../services/locationService"
 import { UserContext } from "../../contexts/UserContext";
 
-const SavedLocationForm = () => { 
+
+
+const SavedLocationForm = (props) => { 
+
+    const navigate = useNavigate();
     const initialState = {
         name: '',
         streetAddress: '',
@@ -13,11 +17,12 @@ const SavedLocationForm = () => {
 
 
     const {user} = useContext(UserContext)
-    const [formData, setFormData] = useState(initialState); 
+    const [formData, setFormData] = useState(
+        props.selectedSavedLocation ? props.selectedSavedLocation : initialState //!NEED TO KNOW VARIABLE BEING PASSED IN AS PROPS.
+    ); 
 
 
     const handleChange = (evt) => {
-        console.log(evt.target.value);
         setFormData({ ...formData, [evt.target.name]: evt.target.value });
     };
 
@@ -26,14 +31,21 @@ const SavedLocationForm = () => {
         evt.preventDefault();
         console.log('formData:', formData);
         //set long lat api call
-        const newLocation = locationService.create(formData, user)
-        console.log(newLocation);
-   
-    } catch (err) {
-     console.log(err);
-     };
+        if (props.selectedSavedLocation) {
+            locationService.update(formData, user, props.selectedSavedLocation);
+        } else {
+             const newLocation = locationService.create(formData, user)
+             console.log(newLocation);
+        }
+            navigate('/');
+        } 
+            catch (err) {
+            console.log(err);
+     }
     };
     
+
+
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -62,13 +74,12 @@ const SavedLocationForm = () => {
                     onChange={handleChange}
                     required />
                 <button type="submit">
-                    {/*here will go a ternerary to delineate add vs update */}
-                    Add Location
+                    {props.selectedLocation ? 'Update Address' : 'Add Address'}
                 </button>
             </form>
         </div>
-    )
-}
+    );
+};
 
 
 
