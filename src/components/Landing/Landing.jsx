@@ -4,6 +4,8 @@ import { UserContext } from "../../contexts/UserContext";
 
 import * as userService from "../../services/locationService";
 
+import { Link } from "react-router";
+
 
 
 const Landing = ()=> {
@@ -48,11 +50,14 @@ useEffect(() => {
   fetchSavedLocations();
 }, [user]);
 
+console.log(savedLocations)
+
     return (
         <>
             {!user? (<aside>Please login to see your saved addresses!</aside>):
             (<aside>Welcome {user.username}</aside>)}
         
+            <Link to="/locations/new">Add New</Link>
             <form onSubmit={handleSubmit}>
                 <input type="text"
                 placeholder="Search Addresses"
