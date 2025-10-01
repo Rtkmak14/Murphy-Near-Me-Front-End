@@ -12,6 +12,8 @@ const MapComponent = () => {
         long: -80.36899729999999
     }
 
+    const [cords, setCords] = useState(startCords)
+
     const [markerData, setMarkerData] = useState(null)   
     
     const [searchQuery, setSearchQuery] = useState('');
@@ -21,21 +23,25 @@ const handleChange = (evt) => {
     console.log(evt.target.value);
 };
 
-const handleSubmit = (evt) => {
+const handleSubmit = async (evt) => {
     evt.preventDefault();
-    console.log('This has been submitted');
+    const cordData = await googleMapsService.getGeocode(searchQuery)
+    setCords({
+        lat: cordData.lat,
+        long: cordData.lng
+    })
+    setSearchQuery('')
 };
 
     useEffect(() => {
         const fetchData = async () => {
-        const data = await googleMapsService.nearbySearch(startCords)
-        setMarkerData(data)
-    }
-    fetchData()
-    }, []
+            const data = await googleMapsService.nearbySearch(cords)
+            setMarkerData(data)
+            console.log('fetching')
+        }
+        fetchData()
+    }, [cords]
     );
-
-    console.log(markerData)
 
     return ( 
         <>
@@ -51,12 +57,12 @@ const handleSubmit = (evt) => {
             <Map
                 mapId={'1ff6b69bc633e70ed68a7006'}
                 style={{width: '100vw', height: '100vh'}}
-                defaultCenter={{lat: startCords.lat, lng: startCords.long}}
+                defaultCenter={{lat: cords.lat, lng: cords.long}}
                 defaultZoom={10}
                 gestureHandling='greedy'
                 disableDefaultUI
             />
-            <Marker lat={startCords.lat} lng={startCords.long} />
+            <Marker lat={cords.lat} lng={cords.long} />
             {markerData?.map((mark) => (
                 <Marker lat={mark.location.latitude} lng={mark.location.longitude} />
             ))}
