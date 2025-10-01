@@ -12,7 +12,19 @@ const MapComponent = () => {
         long: -80.36899729999999
     }
 
-    const [markerData, setMarkerData] = useState(null)
+    const [markerData, setMarkerData] = useState(null)   
+    
+    const [searchQuery, setSearchQuery] = useState('');
+
+const handleChange = (evt) => {
+    setSearchQuery(evt.target.value);
+    console.log(evt.target.value);
+};
+
+const handleSubmit = (evt) => {
+    evt.preventDefault();
+    console.log('This has been submitted');
+};
 
     useEffect(() => {
         const fetchData = async () => {
@@ -21,11 +33,20 @@ const MapComponent = () => {
     }
     fetchData()
     }, []
-    )
+    );
 
     console.log(markerData)
 
     return ( 
+        <>
+             <form onSubmit={handleSubmit}>
+             <input type="text"
+                placeholder="Search Addresses"
+                value={searchQuery}
+                onChange={handleChange}/>
+                <button>Submit</button>
+            </form>
+            
         <APIProvider apiKey={apiKey} >
             <Map
                 mapId={'1ff6b69bc633e70ed68a7006'}
@@ -41,6 +62,7 @@ const MapComponent = () => {
             ))}
             
         </APIProvider>
+        </>
     )
 }
 

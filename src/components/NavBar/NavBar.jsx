@@ -19,7 +19,7 @@ const NavBar = () => {
                     <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
                 </ul>
             ) : (
-                <ul>
+                <ul style={{listStyleType: 'none'}}>
                     <li><Link to='/'>Home</Link></li>
                     <li><Link to='/sign-in'>Sign In</Link></li>
                     <li><Link to='/sign-up'>Sign Up</Link></li>
