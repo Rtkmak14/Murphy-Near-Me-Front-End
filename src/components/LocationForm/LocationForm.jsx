@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
-const SavedLocationForm = () => { //NOTE props has NOT been declared yet here. Needs our create new / update functions.
+import * as locationService from "../../services/locationService"
+import { UserContext } from "../../contexts/UserContext";
 
+const SavedLocationForm = () => { 
     const initialState = {
         name: '',
         streetAddress: '',
@@ -9,18 +11,29 @@ const SavedLocationForm = () => { //NOTE props has NOT been declared yet here. N
         state: '',
     }
 
-    const [formData, setFormData] = useState(initialState); //will later add a ternerary to update this for edit form
+
+    const {user} = useContext(UserContext)
+    const [formData, setFormData] = useState(initialState); 
 
 
     const handleChange = (evt) => {
-        setFormData({ ...formData, [evt.target.name]: evt.targt.value });
+        console.log(evt.target.value);
+        setFormData({ ...formData, [evt.target.name]: evt.target.value });
     };
 
     const handleSubmit = (evt) => {
+    try {
         evt.preventDefault();
-        console.log('the Form was submitted') // will add a ternerary to change this to update. also need our props.callbackfunction(formData) for new
-    }
-
+        console.log('formData:', formData);
+        //set long lat api call
+        const newLocation = locationService.create(formData, user)
+        console.log(newLocation);
+   
+    } catch (err) {
+     console.log(err);
+     };
+    };
+    
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -63,3 +76,12 @@ const SavedLocationForm = () => { //NOTE props has NOT been declared yet here. N
 
 
 export default SavedLocationForm;
+
+
+
+
+
+
+
+
+

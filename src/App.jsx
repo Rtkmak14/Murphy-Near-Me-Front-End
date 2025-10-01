@@ -1,12 +1,19 @@
 import { Routes, Route } from "react-router";
 import "./App.css"
-
+// import { useState } from "react";
 import NavBar from "./components/NavBar/NavBar";
 import SignUpForm from "./components/SignUpForm/SignUpForm";
 import SignInForm from './components/signInForm/signInForm'
 import Landing from './components/Landing/Landing'
+import LocationForm from "./components/LocationForm/LocationForm";
+
 
 const App = () => {
+
+
+
+
+
   return (
     <>
       <NavBar />
@@ -14,6 +21,7 @@ const App = () => {
         <Route path="/" element={<Landing/>}/> {/* confirm if this needs to be conditional*/ }
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
+        <Route path='/locations/new' element={<LocationForm/> }/>
       </Routes>
     </>
   )
