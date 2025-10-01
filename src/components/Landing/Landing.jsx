@@ -1,13 +1,8 @@
 import { useEffect, useState, useContext } from "react";
-import { Link } from "react-router";
-
 import { UserContext } from "../../contexts/UserContext";
-
-import * as locationService from "../../services/locationService";
-
 import { Link } from "react-router";
+import * as locationService from "../../services/locationService";
 import SavedLocationsList from "../SavedLocationsList/SavedLocationsList";
-import LocationForm from "../LocationForm/LocationForm"
 
 
 

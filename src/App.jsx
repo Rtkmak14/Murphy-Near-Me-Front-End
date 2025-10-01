@@ -24,7 +24,6 @@ const handleEdit = (location)=> {
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
         <Route path='/locations/new' element={<LocationForm/> }/>
-        <Route path='/locations/show' element={<LocationForm handleEdit={handleEdit} selectedSavedLocation={selectedSavedLocation}/> }/>
       </Routes>
     </>
   )
