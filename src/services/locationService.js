@@ -39,6 +39,30 @@ const index = async (user) => {
   }
 }
 
+
+
+
+const update = async (formData, user, location) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${user._id}/saved-locations/${location._id}`, {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+        const data = await res.json();
+        return data;
+  } catch (err) {
+    console.log(err);
+  };
+};
+
+
+
+
+
 const deleteAddress = async (user,address) => {
   try {
     const res = await fetch(`${BASE_URL}/${user._id}/saved-locations/${address._id}`, {
@@ -54,6 +78,6 @@ const deleteAddress = async (user,address) => {
 
 
 export {
-  index, create, deleteAddress,
+  index, create, deleteAddress, update,
 };
 

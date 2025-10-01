@@ -14,8 +14,7 @@ const Landing = ()=> {
 
     const [savedLocations, setSavedLocations] = useState([]);
     const [selectedSavedLocation, setSelectedSavedLocation] = useState(null)
-    const [isFormOpen, setIsFormOpen] = useState(false)
-    const [editMode, setEditMode] = useState(false)
+    
 
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -27,13 +26,11 @@ const handleChange = (evt) => {
 const handleSubmit = (evt) => {
     evt.preventDefault();
     // console.log('This has been submitted');
-}
+};
 
-const handleEditSavedLocation = (savedLocation)=> {
-  setIsFormOpen(true)
-  setEditMode(true)
-  setSelectedSavedLocation(savedLocation)
-}
+const handleSelect = (savedLocation)=> {
+  setSelectedSavedLocation(savedLocation);
+};
 
 useEffect(() => {
   if (!user) return;
@@ -57,7 +54,7 @@ console.log(savedLocations)
             {!user? (<aside>Please login to see your saved addresses!</aside>):
             (<aside>Welcome {user.username}</aside>)}
         
-            <Link to="/locations/new">Add New</Link>
+
             <form onSubmit={handleSubmit}>
                 <input type="text"
                 placeholder="Search Addresses"
@@ -65,6 +62,8 @@ console.log(savedLocations)
                 onChange={handleChange}/>
                 <button>Submit</button>
             </form>
+
+            <Link to="/locations/new">Add New</Link>
         </>
     )
 }
