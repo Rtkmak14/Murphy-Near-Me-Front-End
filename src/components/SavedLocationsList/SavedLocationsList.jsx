@@ -23,7 +23,7 @@ function SavedLocationsList({ savedLocations, handleEdit}) {
   return (
     <div className="saved-locations">
       <h2>Saved Addresses</h2>
-      <ul>
+      <ul style={{listStyleType: 'none'}}>
         {savedLocations.locations.map((savedLocation) => (
           <li key={savedLocation._id}>
               <Link to={`/users/${user._id}/${savedLocation._id}`}>

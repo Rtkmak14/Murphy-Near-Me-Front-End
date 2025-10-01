@@ -14,7 +14,7 @@ const NavBar = () => {
     return (
         <nav>
             {user ? (
-                <ul>
+                <ul style={{listStyleType: 'none'}}>
                     <li><Link to='/' >Home</Link></li>
                     <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
                 </ul>

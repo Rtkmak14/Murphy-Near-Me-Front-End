@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from "react";
+import { Link } from "react-router";
 
 import { UserContext } from "../../contexts/UserContext";
 
@@ -30,13 +31,7 @@ const handleSubmit = (evt) => {
     // console.log('This has been submitted');
 };
 
-const handleSelect = (savedLocation)=> {
-  setSelectedSavedLocation(savedLocation);
-};
-
 useEffect(() => {
-  if (!user) return;
-
   const fetchSavedLocations = async () => {
     try {
       const data = await locationService.index(user);
@@ -45,7 +40,7 @@ useEffect(() => {
       console.log(err);
     }
   };
-
+  
   fetchSavedLocations();
 },[user]);
 
@@ -53,20 +48,9 @@ console.log(savedLocations)
 
     return (
         <>
-            {!user ? (
-                <aside>Please login to see your saved addresses!</aside>
-              ) : selectedSavedLocation ? (
-                <LocationForm
-                  selectedSavedLocation={selectedSavedLocation}
-                  handleEdit={props.handleEdit}
-                />
-              ) : (
-                <SavedLocationsList
-                  savedLocations={savedLocations}
-                  handleEdit={handleSelect}
-                />
-              )}
-
+            {!user? (<aside>Please login to see your saved addresses!</aside>):
+            (<aside>{<SavedLocationsList savedLocations={savedLocations}/>}</aside>)}
+        
             <form onSubmit={handleSubmit}>
                 <input type="text"
                 placeholder="Search Addresses"
