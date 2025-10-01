@@ -18,7 +18,19 @@ const index = async (user) => {
     console.log(err);
     throw new Error(err);
   }
-};
+}
+
+const deleteAddress = async (user,address) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${user._id}/saved-locations/${address._id}`, {
+      method: 'DELETE',
+    });
+
+    return res.json();
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 export {
   index,
