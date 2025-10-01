@@ -2,9 +2,10 @@ import { useEffect, useState, useContext } from "react";
 
 import { UserContext } from "../../contexts/UserContext";
 
-import * as userService from "../../services/locationService";
+import * as locationService from "../../services/locationService";
 
 import { Link } from "react-router";
+import SavedLocationsList from "../SavedLocationsList/SavedLocationsList";
 
 
 
@@ -40,7 +41,7 @@ useEffect(() => {
 
   const fetchSavedLocations = async () => {
     try {
-      const data = await userService.index(user);
+      const data = await locationService.index(user);
       setSavedLocations(data);
     } catch (err) {
       console.log(err);
@@ -48,14 +49,14 @@ useEffect(() => {
   };
 
   fetchSavedLocations();
-}, [user]);
+},[user]);
 
 console.log(savedLocations)
 
     return (
         <>
             {!user? (<aside>Please login to see your saved addresses!</aside>):
-            (<aside>Welcome {user.username}</aside>)}
+            (<aside>{<SavedLocationsList savedLocations={savedLocations}/>}</aside>)}
         
             <Link to="/locations/new">Add New</Link>
             <form onSubmit={handleSubmit}>
