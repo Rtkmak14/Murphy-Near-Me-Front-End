@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router";
 import * as locationService from "../../services/locationService"
 import { UserContext } from "../../contexts/UserContext";
+import * as googleMapsService from "../../services/googleMapsService";
 
 
 
@@ -21,7 +22,6 @@ const SavedLocationForm = (props) => {
         props.selectedSavedLocation ? props.selectedSavedLocation : initialState //!NEED TO KNOW VARIABLE BEING PASSED IN AS PROPS.
     ); 
 
-
     const handleChange = (evt) => {
         setFormData({ ...formData, [evt.target.name]: evt.target.value });
     };
@@ -31,6 +31,8 @@ const SavedLocationForm = (props) => {
         evt.preventDefault();
         console.log('formData:', formData);
         //set long lat api call
+        //const geo = googleMapsService.getGeocode(formData)
+        //console.log(geo);
         if (props.selectedSavedLocation) {
             locationService.update(formData, user, props.selectedSavedLocation);
         } else {

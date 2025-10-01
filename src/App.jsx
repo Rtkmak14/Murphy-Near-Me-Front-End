@@ -5,7 +5,7 @@ import NavBar from "./components/NavBar/NavBar";
 import SignUpForm from "./components/SignUpForm/SignUpForm";
 import SignInForm from './components/signInForm/signInForm'
 import Landing from './components/Landing/Landing'
-import LocationForm from "./components/LocationForm/LocationForm";
+import LocationForm from "./components/SavedAddressessForm/SavedAddressessForm";
 
 
 const App = () => {

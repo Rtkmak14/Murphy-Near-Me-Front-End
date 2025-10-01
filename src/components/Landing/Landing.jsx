@@ -30,10 +30,6 @@ const handleSubmit = (evt) => {
     // console.log('This has been submitted');
 };
 
-const handleSelect = (savedLocation)=> {
-  setSelectedSavedLocation(savedLocation);
-};
-
 useEffect(() => {
   const fetchSavedLocations = async () => {
     try {
@@ -61,8 +57,6 @@ console.log(savedLocations)
                 onChange={handleChange}/>
                 <button>Submit</button>
             </form>
-
-            <Link to="/locations/new">Add New</Link>
         </>
     )
 }
