@@ -6,10 +6,11 @@ import * as locationService from "../../services/locationService";
 
 import { Link } from "react-router";
 import SavedLocationsList from "../SavedLocationsList/SavedLocationsList";
+import LocationForm from "../LocationForm/LocationForm"
 
 
 
-const Landing = ()=> {
+const Landing = (props)=> {
 
     const {user} = useContext(UserContext)
 
@@ -52,9 +53,19 @@ console.log(savedLocations)
 
     return (
         <>
-            {!user? (<aside>Please login to see your saved addresses!</aside>):
-            (<aside>{<SavedLocationsList savedLocations={savedLocations}/>}</aside>)}
-        
+            {!user ? (
+                <aside>Please login to see your saved addresses!</aside>
+              ) : selectedSavedLocation ? (
+                <LocationForm
+                  selectedSavedLocation={selectedSavedLocation}
+                  handleEdit={props.handleEdit}
+                />
+              ) : (
+                <SavedLocationsList
+                  savedLocations={savedLocations}
+                  handleEdit={handleSelect}
+                />
+              )}
 
             <form onSubmit={handleSubmit}>
                 <input type="text"
@@ -63,8 +74,6 @@ console.log(savedLocations)
                 onChange={handleChange}/>
                 <button>Submit</button>
             </form>
-
-            <Link to="/locations/new">Add New</Link>
         </>
     )
 }

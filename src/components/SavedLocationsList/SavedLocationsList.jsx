@@ -3,7 +3,8 @@ import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 
 
-function SavedLocationsList({ savedLocations, handleEditSavedLocations, handleDeleteSavedLocations }) {
+
+function SavedLocationsList({ savedLocations, handleEdit}) {
   const {user} = useContext(UserContext)
 
   console.log(savedLocations)
@@ -15,6 +16,10 @@ function SavedLocationsList({ savedLocations, handleEditSavedLocations, handleDe
     )
   }
 
+  const handleClick = (savedLocation)=> {
+    handleEdit(savedLocation)
+  }
+
   return (
     <div className="saved-locations">
       <h2>Saved Addresses</h2>
@@ -24,11 +29,13 @@ function SavedLocationsList({ savedLocations, handleEditSavedLocations, handleDe
               <Link to={`/users/${user._id}/${savedLocation._id}`}>
                   {savedLocation.name}
               </Link>
+              <button onClick={() => handleClick(savedLocation)}>Edit</button>
           </li>
         ))}
       </ul>
       <Link to="/locations/new">Add New</Link>
     </div>
+    
   );
 }
 
