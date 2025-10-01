@@ -6,7 +6,7 @@ import {
 } from '@vis.gl/react-google-maps';
 
 const Marker = ({ lat, lng }) => {
-  const [infowindowOpen, setInfowindowOpen] = useState(true);
+  const [infowindowOpen, setInfowindowOpen] = useState(false);
   const [markerRef, marker] = useAdvancedMarkerRef();
 
   return (

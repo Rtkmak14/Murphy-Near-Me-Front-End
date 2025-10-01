@@ -37,31 +37,24 @@ const handleEditSavedLocation = (savedLocation)=> {
   setSelectedSavedLocation(savedLocation)
 }
 
-const fetchQuery = async () => {
-  const data = await googleMapsService.nearbySearch()
-  console.log(data)
-}
+useEffect(() => {
+  const fetchSavedLocations = async () => {
+    try {
+      const data = await userService.index(user);
+      setSavedLocations(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-// useEffect(() => {
-//   const fetchSavedLocations = async () => {
-//     try {
-//       const data = await userService.index(user);
-//       setSavedLocations(data);
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
-
-//   if(user) fetchSavedLocations();
-// }, [user]);
+  if(user) fetchSavedLocations();
+}, [user]);
     console.log(savedLocations.locations)
     return (
         <>
             {!user? (<aside>Please login to see your saved addresses!</aside>):
             (<aside>Welcome {user.username}</aside>)}
-            <MapComponent />
             <Link to="/locations/new">create address</Link>
-            <button onClick={fetchQuery}>get data</button>>
               
             <form onSubmit={handleSubmit}>
                 <input type="text"

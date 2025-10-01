@@ -1,14 +1,14 @@
 // const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/users`;
 const apiKey = `${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}`
 
-const nearbySearch = async () => {
+const nearbySearch = async (startCords) => {
     const search =  {
         textQuery: 'Murphy USA',
         locationBias: {
             circle: {
                 center: {
-                    latitude: 33.9299471,
-                    longitude: -80.36899729999999
+                    latitude: startCords.lat,
+                    longitude: startCords.long
                 },
             radius: 500.0
             }
