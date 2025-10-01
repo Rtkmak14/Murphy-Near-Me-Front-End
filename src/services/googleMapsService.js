@@ -1,20 +1,31 @@
 // const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/users`;
 const apiKey = `${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}`
 
-const nearbySearch = async () => {
-    const search =  {textQuery: 'Murphy USA'}
+const nearbySearch = async (startCords) => {
+    const search =  {
+        textQuery: 'Murphy USA',
+        locationBias: {
+            circle: {
+                center: {
+                    latitude: startCords.lat,
+                    longitude: startCords.long
+                },
+            radius: 500.0
+            }
+        }
+    }
     const res = await fetch('https://places.googleapis.com/v1/places:searchText', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-Goog-FieldMask': '*',
+            'X-Goog-FieldMask': 'places.id,places.location,places.shortFormattedAddress',
             'X-Goog-Api-Key': apiKey
         },
         body: JSON.stringify(search)
     })
 
     const data = await res.json()
-    return data
+    return data.places
 }
 
 const getGeocode = async (address) => {
