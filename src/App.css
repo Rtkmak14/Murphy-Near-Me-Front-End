@@ -44,3 +44,20 @@ main {
 .search-bar input {
   margin-right: 10px;
 }
+nav {
+  display: flex;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  border: 2px solid #ccc;
+  border-radius: 6px; 
+}
+
+nav ul li a:hover {
+   font-size: 1.1rem;
+   text-decoration:underline
+}
