@@ -39,18 +39,22 @@ const handleSubmit = async (evt) => {
     console.log(coords)
 
     return ( 
-        <>
-             <form onSubmit={handleSubmit}>
-             <input type="text"
-                placeholder="Search Addresses"
-                value={searchQuery}
-                onChange={handleChange}/>
+        <div className="map-container">
+             <form onSubmit={handleSubmit} className="search-bar">
+                <label htmlFor="search">Search: </label>
+                <input type="text"
+                    id="search"
+                    name="search"
+                    placeholder="Search Addresses"
+                    value={searchQuery}
+                    onChange={handleChange}
+                />
                 <button>Submit</button>
             </form>
             
             <Map
                 mapId={'1ff6b69bc633e70ed68a7006'}
-                style={{width: '100vw', height: '100vh'}}
+                style={{width: '80vw', height: '80vh'}}
                 defaultCenter={{lat: coords.lat, lng: coords.long}}
                 defaultZoom={10}
                 gestureHandling='greedy'
@@ -67,7 +71,7 @@ const handleSubmit = async (evt) => {
                 />
             ))}
             
-        </>
+        </div>
     )
 }
 
