@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router";
 import "./App.css"
-// import { useState } from "react";
+import { useState } from "react";
 import NavBar from "./components/NavBar/NavBar";
 import SignUpForm from "./components/SignUpForm/SignUpForm";
 import SignInForm from './components/signInForm/signInForm'
@@ -11,14 +11,17 @@ import MapComponent from "./components/MapComponent/MapComponent";
 
 const App = () => {
 
+const [selectedSavedLocation,setselectedSavedLocation] = useState(null)
 
-
+const handleEdit = (location)=> {
+   setselectedSavedLocation(location)
+}
 
   return (
     <>
       <NavBar />
       <Routes>
-        <Route path="/" element={<Landing/>}/> {/* confirm if this needs to be conditional*/ }
+        <Route path="/" element={<Landing handleEdit={handleEdit}/>}/> {/* confirm if this needs to be conditional*/ }
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
         <Route path='/locations/new' element={<LocationForm/> }/>

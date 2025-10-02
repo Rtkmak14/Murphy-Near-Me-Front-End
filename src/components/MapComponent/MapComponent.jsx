@@ -20,11 +20,11 @@ const MapComponent = () => {
 
 const handleChange = (evt) => {
     setSearchQuery(evt.target.value);
-    console.log(evt.target.value);
 };
 
 const handleSubmit = async (evt) => {
     evt.preventDefault();
+
     const cordData = await googleMapsService.getGeocode(searchQuery)
     setCords({
         lat: cordData.lat,
