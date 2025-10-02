@@ -7,7 +7,7 @@ import * as googleMapsService from "../../services/googleMapsService";
 
 
 const SavedLocationForm = (props) => { 
-    console.log(props.selectedSavedLocation);
+    // console.log(props.selectedSavedLocation);
     const navigate = useNavigate();
     const initialState = {
         name: '',
@@ -51,33 +51,45 @@ const SavedLocationForm = (props) => {
 
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className="formContainer">
+            <form onSubmit={handleSubmit} className="controlledForm">
+                <div className="nameField">
                 <label htmlFor="name">Name: </label>
                 <input id="name"
+                className="inputField"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
                     required />
+                </div>
+                <div className="streetField">
                 <label htmlFor="streetAddress">Street Address: </label>
                 <input id="streetAddress"
+                className="inputField"
                     name="streetAddress"
                     value={formData.streetAddress}
                     onChange={handleChange}
                     required />
+                </div>
+                <div className="cityField">
                 <label htmlFor="city">City: </label>
                 <input id="city"
+                className="inputField"
                     name="city"
                     value={formData.city}
                     onChange={handleChange}
                     required />
+                </div> 
+                <div className="stateField">
                 <label htmlFor="state">State: </label>
                 <input id="state"
+                className="inputField"
                     name="state"
                     value={formData.state}
                     onChange={handleChange}
                     required />
-                <button type="submit">
+                </div>
+                <button type="submit" className="submitButton">
                     {props.selectedSavedLocation ? 'Update Address' : 'Add Address'}
                 </button>
             </form>
