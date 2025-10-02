@@ -20,7 +20,7 @@ const [selectedSavedLocation, setSelectedSavedLocation] = useState(null)
         <Route path="/" element={<Landing selectedSavedLocation={selectedSavedLocation} setSelectedSavedLocation={setSelectedSavedLocation}/>}/> {/* confirm if this needs to be conditional*/ }
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
-        <Route path='/locations/new' element={<LocationForm selectedSavedLocation={selectedSavedLocation} />}/>
+        <Route path='/locations/new' element={<LocationForm selectedSavedLocation={selectedSavedLocation} setSelectedSavedLocation={setSelectedSavedLocation}/>}/>
       </Routes>
     </>
   )
