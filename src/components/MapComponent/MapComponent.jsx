@@ -37,7 +37,7 @@ const handleSubmit = async (evt) => {
         const fetchData = async () => {
             const data = await googleMapsService.nearbySearch(cords)
             setMarkerData(data)
-            console.log('fetching')
+            console.log('fetching', data)
         }
         fetchData()
     }, [cords]
@@ -64,7 +64,13 @@ const handleSubmit = async (evt) => {
             />
             <Marker lat={cords.lat} lng={cords.long} />
             {markerData?.map((mark) => (
-                <Marker lat={mark.location.latitude} lng={mark.location.longitude} />
+                <Marker lat={mark.location.latitude} 
+                lng={mark.location.longitude} 
+                name={mark.displayName} 
+                shortAddress={mark.shortFormattedAddress} 
+                website={mark.websiteUri}
+                photos={mark.photos}
+                />
             ))}
             
         </APIProvider>

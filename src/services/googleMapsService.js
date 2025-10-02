@@ -18,7 +18,7 @@ const nearbySearch = async (startCords) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-Goog-FieldMask': 'places.id,places.location,places.shortFormattedAddress',
+            'X-Goog-FieldMask': 'places.id,places.location,places.shortFormattedAddress,places.displayName,places.websiteUri,places.photos',
             'X-Goog-Api-Key': apiKey
         },
         body: JSON.stringify(search)
