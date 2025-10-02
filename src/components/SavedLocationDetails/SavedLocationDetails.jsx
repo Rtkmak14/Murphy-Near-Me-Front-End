@@ -5,17 +5,12 @@ import { UserContext } from "../../contexts/UserContext"
 import { useContext } from "react"
 
 
-const SavedLocationDetails = ({ selectedSavedLocation, onBack, handleEdit }) => {
+const SavedLocationDetails = ({ selectedSavedLocation, onBack, handleEdit, handleDelete }) => {
 
   const { name, address, city, state, _id } = selectedSavedLocation
 
-  const {user} = useContext(UserContext)
-  const navigate = useNavigate() 
+  const {user} = useContext(UserContext) 
 
-    const handleDelete = ()=> {
-        locationService.deleteAddress(user,selectedSavedLocation)
-        navigate("/")
-    }
     
     console.log(selectedSavedLocation)
   return (
