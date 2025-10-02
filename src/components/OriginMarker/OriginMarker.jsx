@@ -2,7 +2,8 @@ import {useState} from 'react';
 import {
   AdvancedMarker,
   InfoWindow,
-  useAdvancedMarkerRef
+  useAdvancedMarkerRef,
+  Pin
 } from '@vis.gl/react-google-maps';
 
 const OriginMarker = ({ lat, lng, selectedSavedLocation }) => {
@@ -16,7 +17,7 @@ const OriginMarker = ({ lat, lng, selectedSavedLocation }) => {
         onClick={() => setInfowindowOpen(true)}
         position={{lat: lat, lng: lng}} 
         title={`Current Location`}
-      />
+      ><Pin background={'#f1f504ff'} glyphColor={'#f4f7f5ff'} borderColor={'#000301ff'}></Pin></AdvancedMarker>
       {infowindowOpen && (
         <InfoWindow
           anchor={marker}
