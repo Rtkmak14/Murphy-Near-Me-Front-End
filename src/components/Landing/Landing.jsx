@@ -5,10 +5,12 @@ import * as locationService from "../../services/locationService";
 import SavedLocationsList from "../SavedLocationsList/SavedLocationsList";
 import MapComponent from "../MapComponent/MapComponent";
 import SavedLocationDetails from "../SavedLocationDetails/SavedLocationDetails"
+import { useNavigate } from "react-router";
 
 
 const Landing = ({handleEdit})=> {
 
+    const navigate = useNavigate()
     const {user} = useContext(UserContext)
 
     const [savedLocations, setSavedLocations] = useState([]);
@@ -18,6 +20,15 @@ const Landing = ({handleEdit})=> {
       setSelectedSavedLocation(location)
     }
     
+    const handleDelete = async ()=> {
+        await locationService.deleteAddress(user,selectedSavedLocation)
+        console.log(savedLocations)
+        const result = savedLocations.locations.filter((location)=> {
+          return location._id !== selectedSavedLocation._id
+        })
+        setSavedLocations({locations: result})
+        setSelectedSavedLocation(null)
+    }
 
 useEffect(() => {
   const fetchSavedLocations = async () => {
@@ -41,6 +52,7 @@ console.log(selectedSavedLocation)
             ) : selectedSavedLocation ? (
               <SavedLocationDetails
                 selectedSavedLocation={selectedSavedLocation}
+                handleDelete={handleDelete}
                 onBack={() => setSelectedSavedLocation(null)}
                 handleEdit={handleEdit}
               />
