@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import * as locationService from "../../services/locationService";
 import SavedLocationsList from "../SavedLocationsList/SavedLocationsList";
 import MapComponent from "../MapComponent/MapComponent";
-
+import SavedLocationDetails from "../SavedLocationDetails/SavedLocationDetails"
 
 
 const Landing = (props)=> {
@@ -13,9 +13,11 @@ const Landing = (props)=> {
 
     const [savedLocations, setSavedLocations] = useState([]);
     const [selectedSavedLocation, setSelectedSavedLocation] = useState(null)
+
+    const handleSelect = (location) => {
+      setSelectedSavedLocation(location)
+    }
     
-
-
 
 useEffect(() => {
   const fetchSavedLocations = async () => {
@@ -30,14 +32,26 @@ useEffect(() => {
   fetchSavedLocations();
 },[user]);
 
-console.log(savedLocations)
+console.log(selectedSavedLocation)
 
     return (
         <>
-            {!user? (<aside>Please login to see your saved addresses!</aside>):
-            (<aside>{<SavedLocationsList savedLocations={savedLocations}/>}</aside>)}
-            <MapComponent/>
+            {!user ? (
+              <aside>Please login to see your saved addresses!</aside>
+            ) : selectedSavedLocation ? (
+              <SavedLocationDetails
+                selectedSavedLocation={selectedSavedLocation}
+                onBack={() => setSelectedSavedLocation(null)}
+              />
+            ) : (
+              <SavedLocationsList
+                savedLocations={savedLocations}
+                handleSelect={handleSelect}
+              />
+            )}
+            <MapComponent />
         </>
+
     )
 }
 

@@ -4,7 +4,7 @@ import { UserContext } from "../../contexts/UserContext";
 
 
 
-function SavedLocationsList({ savedLocations, handleEdit}) {
+function SavedLocationsList({ savedLocations, handleSelect}) {
   const {user} = useContext(UserContext)
 
   console.log(savedLocations)
@@ -17,7 +17,7 @@ function SavedLocationsList({ savedLocations, handleEdit}) {
   }
 
   const handleClick = (savedLocation)=> {
-    handleEdit(savedLocation)
+    handleSelect(savedLocation)
   }
 
   return (
@@ -26,10 +26,7 @@ function SavedLocationsList({ savedLocations, handleEdit}) {
       <ul style={{listStyleType: 'none'}}>
         {savedLocations.locations.map((savedLocation) => (
           <li key={savedLocation._id}>
-              <Link to={`/users/${user._id}/${savedLocation._id}`}>
-                  {savedLocation.name}
-              </Link>
-              <button onClick={() => handleClick(savedLocation)}>Edit</button>
+              <Link to="/" onClick={()=>handleClick(savedLocation)}>{savedLocation.name}</Link>
           </li>
         ))}
       </ul>

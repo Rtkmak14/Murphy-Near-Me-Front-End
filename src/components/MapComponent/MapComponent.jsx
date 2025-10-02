@@ -18,12 +18,10 @@ const MapComponent = () => {
 
 const handleChange = (evt) => {
     setSearchQuery(evt.target.value);
-    console.log(evt.target.value);
 };
 
 const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log('This has been submitted');
 };
 
     useEffect(() => {
@@ -35,7 +33,6 @@ const handleSubmit = (evt) => {
     }, []
     );
 
-    console.log(markerData)
 
     return ( 
         <>

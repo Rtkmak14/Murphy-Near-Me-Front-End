@@ -67,7 +67,9 @@ const deleteAddress = async (user,address) => {
   try {
     const res = await fetch(`${BASE_URL}/${user._id}/saved-locations/${address._id}`, {
       method: 'DELETE',
-    });
+      headers: {
+           Authorization: `Bearer ${localStorage.getItem('token')}`,
+    }});
 
     return res.json();
   } catch (err) {
