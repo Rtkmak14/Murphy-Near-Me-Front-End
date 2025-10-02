@@ -16,6 +16,7 @@ const [selectedSavedLocation, setSelectedSavedLocation] = useState(null)
   return (
     <>
       <NavBar setSelectedSavedLocation={selectedSavedLocation}/>
+     
       <Routes>
         <Route path="/" element={<Landing selectedSavedLocation={selectedSavedLocation} setSelectedSavedLocation={setSelectedSavedLocation}/>}/> {/* confirm if this needs to be conditional*/ }
         <Route path='/sign-up' element={<SignUpForm />} />

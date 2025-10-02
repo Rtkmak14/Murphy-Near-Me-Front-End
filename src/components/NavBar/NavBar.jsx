@@ -21,10 +21,12 @@ const NavBar = ({setSelectedSavedLocation}) => {
             ) : (
                 <ul style={{listStyleType: 'none'}}>
                     <li><Link to='/'>Home</Link></li>
+                    <div className="sign-options">
                     <li><Link to='/sign-in'>Sign In</Link></li>
                     <li><Link to='/sign-up'>Sign Up</Link></li>
+                    </div>
                 </ul>
-            )}
+            )}  <h1 className="logo">Murphy's Near Me</h1>
         </nav>
     )
 }
