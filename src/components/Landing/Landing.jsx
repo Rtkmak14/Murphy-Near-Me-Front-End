@@ -7,7 +7,7 @@ import MapComponent from "../MapComponent/MapComponent";
 import SavedLocationDetails from "../SavedLocationDetails/SavedLocationDetails"
 
 
-const Landing = (props)=> {
+const Landing = ({handleEdit})=> {
 
     const {user} = useContext(UserContext)
 
@@ -42,6 +42,7 @@ console.log(selectedSavedLocation)
               <SavedLocationDetails
                 selectedSavedLocation={selectedSavedLocation}
                 onBack={() => setSelectedSavedLocation(null)}
+                handleEdit={handleEdit}
               />
             ) : (
               <SavedLocationsList

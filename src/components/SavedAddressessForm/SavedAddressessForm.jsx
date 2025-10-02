@@ -7,7 +7,7 @@ import * as googleMapsService from "../../services/googleMapsService";
 
 
 const SavedLocationForm = (props) => { 
-
+    console.log(props.selectedSavedLocation);
     const navigate = useNavigate();
     const initialState = {
         name: '',
@@ -77,7 +77,7 @@ const SavedLocationForm = (props) => {
                     onChange={handleChange}
                     required />
                 <button type="submit">
-                    {props.selectedLocation ? 'Update Address' : 'Add Address'}
+                    {props.selectedSavedLocation ? 'Update Address' : 'Add Address'}
                 </button>
             </form>
         </div>

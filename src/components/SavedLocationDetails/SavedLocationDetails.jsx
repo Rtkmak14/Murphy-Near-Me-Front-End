@@ -5,7 +5,7 @@ import { UserContext } from "../../contexts/UserContext"
 import { useContext } from "react"
 
 
-const SavedLocationDetails = ({ selectedSavedLocation, onBack }) => {
+const SavedLocationDetails = ({ selectedSavedLocation, onBack, handleEdit }) => {
 
   const { name, address, city, state, _id } = selectedSavedLocation
 
@@ -24,7 +24,7 @@ const SavedLocationDetails = ({ selectedSavedLocation, onBack }) => {
       <p>{address}</p>
       <p>{city}</p>
       <p>{state}</p>
-      <Link to="/locations/new">Edit</Link>
+      <button onClick={() => handleEdit(selectedSavedLocation)}>Edit</button>
       <button onClick={handleDelete}>Delete</button>
       <button onClick={onBack}>Back to list</button>
     </div>
