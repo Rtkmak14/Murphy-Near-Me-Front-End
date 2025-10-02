@@ -32,11 +32,11 @@ const SignInForm = () => {
 
 
     return (
-        <main>
+        <main className="sign-form">
             <h1>Sign In</h1>
             <h3>{message}</h3>
-            <form autoComplete="off" onSubmit={handleSubmit}>
-                <div>
+            <form autoComplete="off" onSubmit={handleSubmit} className="formContainer">
+                <div className="input-field">
                     <label htmlFor="username">Username: </label>
                     <input
                         type="text"
@@ -47,7 +47,7 @@ const SignInForm = () => {
                         onChange={handleChange}
                         required />
                 </div>
-                <div>
+                <div className="input-field">
                     <label htmlFor="password">Password: </label>
                     <input
                         type="password"

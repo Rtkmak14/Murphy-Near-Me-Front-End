@@ -54,7 +54,7 @@ const handleSubmit = async (evt) => {
             
             <Map
                 mapId={'1ff6b69bc633e70ed68a7006'}
-                style={{width: '80vw', height: '80vh'}}
+                style={{width: '70vw', height: '75vh'}}
                 defaultCenter={{lat: coords.lat, lng: coords.long}}
                 defaultZoom={10}
                 gestureHandling='greedy'
