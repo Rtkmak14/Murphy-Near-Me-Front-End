@@ -9,13 +9,24 @@ import SavedLocationDetails from "../SavedLocationDetails/SavedLocationDetails"
 
 const Landing = ({handleEdit})=> {
 
+  const startCoords = {
+        lat: 33.9299471,
+        long: -80.36899729999999
+    }
+
     const {user} = useContext(UserContext)
 
     const [savedLocations, setSavedLocations] = useState([]);
     const [selectedSavedLocation, setSelectedSavedLocation] = useState(null)
+    const [coords, setCoords] = useState( startCoords )
+
+    const handleUpdateCoords = (newCoords) => {
+      setCoords(newCoords)
+    }
 
     const handleSelect = (location) => {
       setSelectedSavedLocation(location)
+      setCoords(location)
     }
     
 
@@ -50,7 +61,7 @@ console.log(selectedSavedLocation)
                 handleSelect={handleSelect}
               />
             )}
-            <MapComponent />
+            <MapComponent handleUpdateCoords={handleUpdateCoords} coords={coords} />
         </>
 
     )

@@ -5,14 +5,7 @@ import Marker from "../Marker/Marker"
 
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 
-const MapComponent = () => {
-
-    const startCords = {
-        lat: 33.9299471,
-        long: -80.36899729999999
-    }
-
-    const [cords, setCords] = useState(startCords)
+const MapComponent = ({ handleUpdateCoords, coords }) => {
 
     const [markerData, setMarkerData] = useState(null)   
     
@@ -26,7 +19,7 @@ const handleSubmit = async (evt) => {
     evt.preventDefault();
 
     const cordData = await googleMapsService.getGeocode(searchQuery)
-    setCords({
+    handleUpdateCoords({
         lat: cordData.lat,
         long: cordData.lng
     })
@@ -35,12 +28,12 @@ const handleSubmit = async (evt) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await googleMapsService.nearbySearch(cords)
+            const data = await googleMapsService.nearbySearch(coords)
             setMarkerData(data)
             console.log('fetching')
         }
         fetchData()
-    }, [cords]
+    }, [coords]
     );
 
     return ( 
@@ -57,12 +50,12 @@ const handleSubmit = async (evt) => {
             <Map
                 mapId={'1ff6b69bc633e70ed68a7006'}
                 style={{width: '100vw', height: '100vh'}}
-                defaultCenter={{lat: cords.lat, lng: cords.long}}
+                defaultCenter={{lat: coords.lat, lng: coords.long}}
                 defaultZoom={10}
                 gestureHandling='greedy'
                 disableDefaultUI
             />
-            <Marker lat={cords.lat} lng={cords.long} />
+            <Marker lat={coords.lat} lng={coords.long} />
             {markerData?.map((mark) => (
                 <Marker lat={mark.location.latitude} lng={mark.location.longitude} />
             ))}
