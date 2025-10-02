@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 
 import { UserContext } from '../../contexts/UserContext'
 
-const NavBar = () => {
+const NavBar = ({setSelectedSavedLocation}) => {
     const { user, setUser } = useContext(UserContext)
 
     const handleSignOut = () => {
@@ -15,7 +15,7 @@ const NavBar = () => {
         <nav>
             {user ? (
                 <ul style={{listStyleType: 'none'}}>
-                    <li><Link to='/' >Home</Link></li>
+                    <li><Link to='/' onClick={()=> setSelectedSavedLocation(null)}>Home</Link></li>
                     <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
                 </ul>
             ) : (

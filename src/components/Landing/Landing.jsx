@@ -8,18 +8,24 @@ import SavedLocationDetails from "../SavedLocationDetails/SavedLocationDetails"
 import { useNavigate } from "react-router";
 
 
-const Landing = ({handleEdit})=> {
+const Landing = ({ selectedSavedLocation, setSelectedSavedLocation})=> {
 
     const navigate = useNavigate()
     const {user} = useContext(UserContext)
 
     const [savedLocations, setSavedLocations] = useState([]);
-    const [selectedSavedLocation, setSelectedSavedLocation] = useState(null)
+    
 
     const handleSelect = (location) => {
       setSelectedSavedLocation(location)
     }
     
+    const handleEdit = (location) => {
+    setSelectedSavedLocation(location);
+    navigate('/locations/new');
+    }
+  
+
     const handleDelete = async ()=> {
         await locationService.deleteAddress(user,selectedSavedLocation)
         console.log(savedLocations)
