@@ -1,21 +1,18 @@
 import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
-import { APIProvider, useMap } from "@vis.gl/react-google-maps";
-import { Link } from "react-router";
+import { useMap } from "@vis.gl/react-google-maps";
 import * as locationService from "../../services/locationService";
 import SavedLocationsList from "../SavedLocationsList/SavedLocationsList";
 import MapComponent from "../MapComponent/MapComponent";
 import SavedLocationDetails from "../SavedLocationDetails/SavedLocationDetails"
-
-const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 
 const Landing = ({handleEdit})=> {
 
   const map = useMap()
 
   const startCoords = {
-        lat: 33.9299471,
-        long: -80.36899729999999
+        lat: 34.8484984,
+        long: -82.40001579999999
     }
 
     const {user} = useContext(UserContext)

@@ -1,12 +1,10 @@
-import { Map, useMap} from "@vis.gl/react-google-maps"
+import { Map } from "@vis.gl/react-google-maps"
 import { useEffect, useState } from "react"
 import * as googleMapsService from '../../services/googleMapsService'
 import Marker from "../Marker/Marker"
 
-// const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 
 const MapComponent = ({ handleUpdateCoords, coords }) => {
-    const map = useMap()
 
     const [markerData, setMarkerData] = useState(null)   
     
@@ -37,6 +35,8 @@ const handleSubmit = async (evt) => {
         fetchData()
     }, [coords]
     );
+
+    console.log(coords)
 
     return ( 
         <>
