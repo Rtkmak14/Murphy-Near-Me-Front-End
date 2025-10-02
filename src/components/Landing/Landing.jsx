@@ -62,7 +62,7 @@ useEffect(() => {
 },[user]);
 
     return (
-        <main>
+        <main className="main-content">
             {!user ? (
               <aside>Please login to see your saved addresses!</aside>
             ) : selectedSavedLocation ? (

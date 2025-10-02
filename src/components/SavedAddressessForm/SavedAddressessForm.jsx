@@ -52,37 +52,33 @@ const SavedLocationForm = (props) => {
     return (
         <div className="formContainer">
             <form onSubmit={handleSubmit} className="controlledForm">
-                <div className="nameField">
+                <div className="input-field">
                 <label htmlFor="name">Name: </label>
                 <input id="name"
-                className="inputField"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
                     required />
                 </div>
-                <div className="streetField">
+                <div className="input-field">
                 <label htmlFor="streetAddress">Street Address: </label>
                 <input id="streetAddress"
-                className="inputField"
                     name="streetAddress"
                     value={formData.streetAddress}
                     onChange={handleChange}
                     required />
                 </div>
-                <div className="cityField">
+                <div className="input-field">
                 <label htmlFor="city">City: </label>
                 <input id="city"
-                className="inputField"
                     name="city"
                     value={formData.city}
                     onChange={handleChange}
                     required />
                 </div> 
-                <div className="stateField">
+                <div className="input-field">
                 <label htmlFor="state">State: </label>
                 <input id="state"
-                className="inputField"
                     name="state"
                     value={formData.state}
                     onChange={handleChange}
