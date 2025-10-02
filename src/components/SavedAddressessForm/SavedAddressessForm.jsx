@@ -14,6 +14,8 @@ const SavedLocationForm = (props) => {
         streetAddress: '',
         city: '',
         state: '',
+        lat: 0,
+        long: 0,
     }
 
 
@@ -26,17 +28,16 @@ const SavedLocationForm = (props) => {
         setFormData({ ...formData, [evt.target.name]: evt.target.value });
     };
 
-    const handleSubmit = (evt) => {
+
+    
+    const handleSubmit = async (evt) => {
     try {
         evt.preventDefault();
-        console.log('formData:', formData);
-        //set long lat api call
-        //const geo = googleMapsService.getGeocode(formData)
-        //console.log(geo);
+        const geoCoord = await googleMapsService.getGeocode(`${formData.streetAddress}, ${formData.city}, ${formData.state}`)
         if (props.selectedSavedLocation) {
-            locationService.update(formData, user, props.selectedSavedLocation);
+            await locationService.update({...formData, lat: geoCoord.lat, long: geoCoord.lng}, user, props.selectedSavedLocation);
         } else {
-             const newLocation = locationService.create(formData, user)
+             const newLocation = await locationService.create({...formData, lat: geoCoord.lat, long: geoCoord.lng}, user)
              console.log(newLocation);
         }
             navigate('/');
@@ -45,7 +46,7 @@ const SavedLocationForm = (props) => {
             console.log(err);
      }
     };
-    
+
 
 
     return (
