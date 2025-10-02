@@ -1,18 +1,10 @@
-import { APIProvider, Map} from "@vis.gl/react-google-maps"
+import { Map } from "@vis.gl/react-google-maps"
 import { useEffect, useState } from "react"
 import * as googleMapsService from '../../services/googleMapsService'
 import Marker from "../Marker/Marker"
 
-const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 
-const MapComponent = () => {
-
-    const startCords = {
-        lat: 33.9299471,
-        long: -80.36899729999999
-    }
-
-    const [cords, setCords] = useState(startCords)
+const MapComponent = ({ handleUpdateCoords, coords }) => {
 
     const [markerData, setMarkerData] = useState(null)   
     
@@ -25,23 +17,26 @@ const handleChange = (evt) => {
 const handleSubmit = async (evt) => {
     evt.preventDefault();
 
-    const cordData = await googleMapsService.getGeocode(searchQuery)
-    setCords({
-        lat: cordData.lat,
-        long: cordData.lng
+    const coordData = await googleMapsService.getGeocode(searchQuery)
+    handleUpdateCoords({
+        lat: coordData.lat,
+        long: coordData.lng
     })
     setSearchQuery('')
 };
 
     useEffect(() => {
+        if (!coords) return
         const fetchData = async () => {
-            const data = await googleMapsService.nearbySearch(cords)
+            const data = await googleMapsService.nearbySearch(coords)
             setMarkerData(data)
-            console.log('fetching', data)
         }
+
         fetchData()
-    }, [cords]
+    }, [coords]
     );
+
+    console.log(coords)
 
     return ( 
         <>
@@ -53,16 +48,15 @@ const handleSubmit = async (evt) => {
                 <button>Submit</button>
             </form>
             
-        <APIProvider apiKey={apiKey} >
             <Map
                 mapId={'1ff6b69bc633e70ed68a7006'}
                 style={{width: '100vw', height: '100vh'}}
-                defaultCenter={{lat: cords.lat, lng: cords.long}}
+                defaultCenter={{lat: coords.lat, lng: coords.long}}
                 defaultZoom={10}
                 gestureHandling='greedy'
                 disableDefaultUI
             />
-            <Marker lat={cords.lat} lng={cords.long} />
+            <Marker lat={coords.lat} lng={coords.long} />
             {markerData?.map((mark) => (
                 <Marker lat={mark.location.latitude} 
                 lng={mark.location.longitude} 
@@ -73,7 +67,6 @@ const handleSubmit = async (evt) => {
                 />
             ))}
             
-        </APIProvider>
         </>
     )
 }

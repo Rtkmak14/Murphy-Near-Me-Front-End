@@ -1,4 +1,3 @@
-// const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/users`;
 const apiKey = `${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}`
 
 const nearbySearch = async (startCords) => {

@@ -36,6 +36,7 @@ const SavedLocationForm = (props) => {
         const geoCoord = await googleMapsService.getGeocode(`${formData.streetAddress}, ${formData.city}, ${formData.state}`)
         if (props.selectedSavedLocation) {
             await locationService.update({...formData, lat: geoCoord.lat, long: geoCoord.lng}, user, props.selectedSavedLocation);
+            props.setSelectedSavedLocation(null)
         } else {
              const newLocation = await locationService.create({...formData, lat: geoCoord.lat, long: geoCoord.lng}, user)
              console.log(newLocation);
