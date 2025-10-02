@@ -58,7 +58,13 @@ const handleSubmit = async (evt) => {
             />
             <Marker lat={coords.lat} lng={coords.long} />
             {markerData?.map((mark) => (
-                <Marker lat={mark.location.latitude} lng={mark.location.longitude} />
+                <Marker lat={mark.location.latitude} 
+                lng={mark.location.longitude} 
+                name={mark.displayName} 
+                shortAddress={mark.shortFormattedAddress} 
+                website={mark.websiteUri}
+                photos={mark.photos}
+                />
             ))}
             
         </>
