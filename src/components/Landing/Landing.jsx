@@ -40,7 +40,6 @@ const Landing = ({ selectedSavedLocation, setSelectedSavedLocation})=> {
 
     const handleDelete = async ()=> {
         await locationService.deleteAddress(user,selectedSavedLocation)
-        console.log(savedLocations)
         const result = savedLocations.locations.filter((location)=> {
           return location._id !== selectedSavedLocation._id
         })

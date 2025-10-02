@@ -2,7 +2,6 @@ const SavedLocationDetails = ({ selectedSavedLocation, onBack, handleEdit, handl
 
   const { name, streetAddress, city, state, _id } = selectedSavedLocation
     
-    console.log(selectedSavedLocation)
   return (
     <div>
       <h2>{name}</h2>

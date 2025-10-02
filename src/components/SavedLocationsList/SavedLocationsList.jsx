@@ -2,7 +2,6 @@ import { Link } from "react-router";
 
 function SavedLocationsList({ savedLocations, handleSelect}) {
 
-  console.log(savedLocations)
   if (!savedLocations.locations) {
     return (
       <div>

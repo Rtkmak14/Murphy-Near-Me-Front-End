@@ -7,7 +7,7 @@ import * as googleMapsService from "../../services/googleMapsService";
 
 
 const SavedLocationForm = (props) => { 
-    // console.log(props.selectedSavedLocation);
+
     const navigate = useNavigate();
     const initialState = {
         name: '',
@@ -38,8 +38,7 @@ const SavedLocationForm = (props) => {
             await locationService.update({...formData, lat: geoCoord.lat, long: geoCoord.lng}, user, props.selectedSavedLocation);
             props.setSelectedSavedLocation(null)
         } else {
-             const newLocation = await locationService.create({...formData, lat: geoCoord.lat, long: geoCoord.lng}, user)
-             console.log(newLocation);
+            await locationService.create({...formData, lat: geoCoord.lat, long: geoCoord.lng}, user)
         }
             navigate('/');
         } 

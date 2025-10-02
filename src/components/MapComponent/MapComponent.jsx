@@ -15,28 +15,36 @@ const handleChange = (evt) => {
 };
 
 const handleSubmit = async (evt) => {
-    evt.preventDefault();
+    try{
+        evt.preventDefault();
 
-    const coordData = await googleMapsService.getGeocode(searchQuery)
-    handleUpdateCoords({
-        lat: coordData.lat,
-        long: coordData.lng
-    })
-    setSearchQuery('')
+        const coordData = await googleMapsService.getGeocode(searchQuery)
+        handleUpdateCoords({
+            lat: coordData.lat,
+            long: coordData.lng
+        })
+        setSearchQuery('')
+    } catch (err) {
+        console.log(err)
+    }
+
 };
 
     useEffect(() => {
         if (!coords) return
         const fetchData = async () => {
-            const data = await googleMapsService.nearbySearch(coords)
-            setMarkerData(data)
+            try {
+                const data = await googleMapsService.nearbySearch(coords)
+                setMarkerData(data)
+            } catch (err) {
+                console.log(err)
+            }
+            
         }
 
         fetchData()
     }, [coords]
     );
-
-    console.log(coords)
 
     return ( 
         <div className="map-container">
