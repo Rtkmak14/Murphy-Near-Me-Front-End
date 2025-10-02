@@ -63,7 +63,7 @@ useEffect(() => {
 },[user]);
 
     return (
-        <>
+        <main>
             {!user ? (
               <aside>Please login to see your saved addresses!</aside>
             ) : selectedSavedLocation ? (
@@ -80,7 +80,7 @@ useEffect(() => {
               />
             )}
            <MapComponent handleUpdateCoords={handleUpdateCoords} coords={coords} selectedSavedLocation={selectedSavedLocation} />            
-        </>
+        </main>
 
     )
 }
