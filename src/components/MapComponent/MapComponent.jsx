@@ -2,9 +2,9 @@ import { Map } from "@vis.gl/react-google-maps"
 import { useEffect, useState } from "react"
 import * as googleMapsService from '../../services/googleMapsService'
 import Marker from "../Marker/Marker"
+import OriginMarker from "../OriginMarker/OriginMarker"
 
-
-const MapComponent = ({ handleUpdateCoords, coords }) => {
+const MapComponent = ({ handleUpdateCoords, coords, selectedSavedLocation }) => {
 
     const [markerData, setMarkerData] = useState(null)   
     
@@ -56,7 +56,7 @@ const handleSubmit = async (evt) => {
                 gestureHandling='greedy'
                 disableDefaultUI
             />
-            <Marker lat={coords.lat} lng={coords.long} />
+            <OriginMarker lat={coords.lat} lng={coords.long} selectedSavedLocation={selectedSavedLocation} />
             {markerData?.map((mark) => (
                 <Marker lat={mark.location.latitude} lng={mark.location.longitude} />
             ))}
