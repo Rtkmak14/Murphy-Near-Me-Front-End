@@ -20,7 +20,6 @@ const Landing = ({ selectedSavedLocation, setSelectedSavedLocation})=> {
     const {user} = useContext(UserContext)
 
     const [savedLocations, setSavedLocations] = useState([]);
-    const [selectedSavedLocation, setSelectedSavedLocation] = useState(null)
     const [coords, setCoords] = useState( startCoords )
 
     const handleUpdateCoords = (newCoords) => {
@@ -30,10 +29,7 @@ const Landing = ({ selectedSavedLocation, setSelectedSavedLocation})=> {
 
     const handleSelect = (location) => {
       handleUpdateCoords(location)
-      setCoords({
-        lat: location.lat,
-        long: location.long
-      })
+      setSelectedSavedLocation(location)
     }
     
     const handleEdit = (location) => {
@@ -83,7 +79,7 @@ useEffect(() => {
                 handleSelect={handleSelect}
               />
             )}
-           <MapComponent handleUpdateCoords={handleUpdateCoords} coords={coords} />            
+           <MapComponent handleUpdateCoords={handleUpdateCoords} coords={coords} selectedSavedLocation={selectedSavedLocation} />            
         </>
 
     )
