@@ -1,6 +1,8 @@
 const apiKey = `${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}`
 
 const nearbySearch = async (startCords) => {
+
+    try {
     const search =  {
         textQuery: 'Murphy USA',
         includedType: 'gas_station',
@@ -25,14 +27,33 @@ const nearbySearch = async (startCords) => {
     })
 
     const data = await res.json()
+
+    if (data.err) {
+      throw new Error(data.err);
+    }
+
     return data.places
+    } catch (err) {
+        console.log(err)
+    }
+    
 }
 
 const getGeocode = async (address) => {
-    address.split(' ').join('+')
-    const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${apiKey}`)
-    const data = await res.json()
-    return data.results[0].geometry.location
+    try {
+        address.split(' ').join('+')
+        const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${apiKey}`)
+        const data = await res.json()
+
+        if (data.err) {
+            throw new Error(data.err);
+        }
+
+        return data.results[0].geometry.location
+    } catch (err) {
+        console.log(err)
+    }
+
 }
 
 export {
