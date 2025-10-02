@@ -1,11 +1,12 @@
-import { APIProvider, Map} from "@vis.gl/react-google-maps"
+import { Map, useMap} from "@vis.gl/react-google-maps"
 import { useEffect, useState } from "react"
 import * as googleMapsService from '../../services/googleMapsService'
 import Marker from "../Marker/Marker"
 
-const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
+// const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 
 const MapComponent = ({ handleUpdateCoords, coords }) => {
+    const map = useMap()
 
     const [markerData, setMarkerData] = useState(null)   
     
@@ -18,20 +19,21 @@ const handleChange = (evt) => {
 const handleSubmit = async (evt) => {
     evt.preventDefault();
 
-    const cordData = await googleMapsService.getGeocode(searchQuery)
+    const coordData = await googleMapsService.getGeocode(searchQuery)
     handleUpdateCoords({
-        lat: cordData.lat,
-        long: cordData.lng
+        lat: coordData.lat,
+        long: coordData.lng
     })
     setSearchQuery('')
 };
 
     useEffect(() => {
+        if (!coords) return
         const fetchData = async () => {
             const data = await googleMapsService.nearbySearch(coords)
             setMarkerData(data)
-            console.log('fetching')
         }
+
         fetchData()
     }, [coords]
     );
@@ -46,7 +48,6 @@ const handleSubmit = async (evt) => {
                 <button>Submit</button>
             </form>
             
-        <APIProvider apiKey={apiKey} >
             <Map
                 mapId={'1ff6b69bc633e70ed68a7006'}
                 style={{width: '100vw', height: '100vh'}}
@@ -60,7 +61,6 @@ const handleSubmit = async (evt) => {
                 <Marker lat={mark.location.latitude} lng={mark.location.longitude} />
             ))}
             
-        </APIProvider>
         </>
     )
 }

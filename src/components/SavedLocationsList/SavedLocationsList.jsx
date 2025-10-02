@@ -1,11 +1,6 @@
 import { Link } from "react-router";
-import { useContext } from "react";
-import { UserContext } from "../../contexts/UserContext";
-
-
 
 function SavedLocationsList({ savedLocations, handleSelect}) {
-  const {user} = useContext(UserContext)
 
   console.log(savedLocations)
   if (!savedLocations.locations) {
