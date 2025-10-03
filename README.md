@@ -16,9 +16,9 @@ Our team built Murphy Near Me to simplify fuel planning for commuters, travelers
 
 ## Getting Started
 
--  [Live App](placeholder)
+-  [Live App](https://murphy-near-me.netlify.app/)
 -  [Planning Materials](https://trello.com/b/YgsdnI0e/murphy-finder)
--  [Back-End Repository](placeholder)
+-  [Back-End Repository](https://git.heroku.com/murphy-near-me.git)
 
 ---
 
